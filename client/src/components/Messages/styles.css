@@ -1,0 +1,12 @@
+.messagesWindow {
+    background-color: #ffffff;
+    width: 250px;
+    margin: 1px 2px 1px 2px;
+    padding: 0 2px 0 2px;
+    overflow: hidden;
+}
+
+.personName {
+    color: blue;
+    margin-right: 3px;
+}

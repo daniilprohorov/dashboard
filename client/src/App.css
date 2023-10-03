@@ -1,0 +1,12 @@
+.App {
+  display: flex;
+  justify-content: space-around;
+}
+
+.chatWindow {
+  background-color: #bed1ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 2px;
+}
