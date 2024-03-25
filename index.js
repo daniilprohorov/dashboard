@@ -17,18 +17,31 @@ function dataToObject(data) {
   return JSON.parse(str);
 }
 
-async function saveToDb(db, data) {
+function toHexString(n, l = 2) {
+  const hexedString = _.toUpper(n.toString(16))
+  if(!l) return hexedString
+
+  return _.repeat('0', l - hexedString.length) + hexedString
+}
+
+async function saveToDb(db, value) {
   if(!db) {
     console.log("Error DB is not defined");
     return;
   }
-  const bus = dataToObject(data)
-  const sofHexString = _.toUpper(bus.sof.toString(16));
-  const idenHexString = _.toUpper(bus.iden.toString(16));
-  const cmdFlagsHexString = _.toUpper(bus.cmd_flags.toString(16));
-  const dataHexString = _.join(_.map(bus.data, v => _.toUpper(v.toString(16))), ' ');
-  const insertData = [sofHexString, idenHexString, cmdFlagsHexString, dataHexString]
-  await db.run(`INSERT INTO bus(sof, iden, cmd_flags, data) VALUES(?, ?, ?, ?)`, insertData);
+  const {
+    sof,
+    iden,
+    cmd_flags: cmdFlags,
+    data
+  } = dataToObject(value)
+  const insertedValues = [
+    toHexString(sof),
+    toHexString(iden, 3),
+    toHexString(cmdFlags, 1),
+    _.join(_.map(data, toHexString), ' ')
+  ];
+  await db.run(`INSERT INTO bus(sof, iden, cmd_flags, data) VALUES(?, ?, ?, ?)`, insertedValues);
 }
 
 parser.on('data', async function(data) {
@@ -49,13 +62,6 @@ async function openDb () {
 async function main() {
   db = await openDb();
   await db.exec('CREATE TABLE IF NOT EXISTS bus(sof text, iden text, cmd_flags text, data text, created DATETIME DEFAULT CURRENT_TIMESTAMP)');
-  // await saveToDb(db, JSON.stringify({
-  //   sof: 'sof',
-  //   iden: 'iden',
-  //   cmd_flags: 'cmd_flags',
-  //   cmd_flags_f: 'cmd_flags_f',
-  //   data: 'lol kek this is data'
-  // }));
 }
 
 sqlite3.verbose()
