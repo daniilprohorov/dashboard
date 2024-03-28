@@ -19,9 +19,10 @@ function dataToObject(data) {
 
 function toHexString(n, l = 2) {
   const hexedString = _.toUpper(n.toString(16))
-  if(!l) return hexedString
+  //if(!l) return hexedString
+  const repeat = l - hexedString.length;
 
-  return _.repeat('0', l - hexedString.length) + hexedString
+  return _.repeat('0', repeat < 0 ? 0 : repeat) + hexedString
 }
 
 async function saveToDb(db, value) {
@@ -30,24 +31,35 @@ async function saveToDb(db, value) {
     return;
   }
   const {
-    sof,
     iden,
-    cmd_flags: cmdFlags,
+    cmd_flag: cmdFlag,
     data
   } = dataToObject(value)
+  const dataStr = _.join(data, ' ');
   const insertedValues = [
-    toHexString(sof),
-    toHexString(iden, 3),
-    toHexString(cmdFlags, 1),
-    _.join(_.map(data, toHexString), ' ')
+    iden,
+    cmdFlag,
+    dataStr
   ];
-  await db.run(`INSERT INTO bus(sof, iden, cmd_flags, data) VALUES(?, ?, ?, ?)`, insertedValues);
+  await db.run(`INSERT INTO bus(iden, cmd_flag, data) VALUES(?, ?, ?)`, insertedValues);
+  return {iden, cmdFlag, data: dataStr};
+}
+
+function showIden(obj, idenFilteredBy) {
+  if (obj.iden === idenFilteredBy) {
+    const {iden, cmdFlag, data} = obj;
+    console.log(iden, ' | ', cmdFlag, ' | ', data);
+  }
 }
 
 parser.on('data', async function(data) {
   const obj = dataToObject(data)
-  console.log(`${Date.now()} ${JSON.stringify(obj)}`)
-  await saveToDb(db, data)
+  const savedObj = await saveToDb(db, data)
+  showIden(savedObj, '8FC');
+  showIden(savedObj, '664');
+  showIden(savedObj, '6E4');
+  showIden(savedObj, '5E4');
+  showIden(savedObj, '4E4');
 });
 
 
@@ -61,7 +73,7 @@ async function openDb () {
 
 async function main() {
   db = await openDb();
-  await db.exec('CREATE TABLE IF NOT EXISTS bus(sof text, iden text, cmd_flags text, data text, created DATETIME DEFAULT CURRENT_TIMESTAMP)');
+  await db.exec('CREATE TABLE IF NOT EXISTS bus(iden text, cmd_flag text, data text, created DATETIME DEFAULT CURRENT_TIMESTAMP)');
 }
 
 sqlite3.verbose()
