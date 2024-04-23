@@ -1,0 +1,8 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+  socket.on('hi', (msg) => {
+    console.log(msg);
+    //window.scrollTo(0, document.body.scrollHeight);
+  });
+</script>
