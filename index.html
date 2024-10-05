@@ -2,7 +2,47 @@
 <script>
   const socket = io();
   socket.on('hi', (msg) => {
-    console.log(msg);
-    //window.scrollTo(0, document.body.scrollHeight);
+    const data = JSON.parse(msg);
+    Object.keys(data).forEach(key => {
+      document.getElementById(key).innerText = data[key];
+    });
   });
 </script>
+<style>
+.row {
+  display: flex;
+}
+.column {
+  flex: 50%;
+  text-align: center;
+  border: 1px solid black;
+  margin: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+</style>
+<body>
+  <p id="test_text"></p>
+
+  <div class="row">
+    <div class="column" id="rpm">default</div>
+    <div class="column">12</div>
+    <div class="column">13</div>
+    <div class="column">14</div>
+    <div class="column">15</div>
+  </div>
+
+  <div class="row">
+    <div class="column">21</div>
+    <div class="column">22</div>
+    <div class="column">23</div>
+  </div>
+
+  <div class="row">
+    <div class="column">31</div>
+    <div class="column">32</div>
+    <div class="column">33</div>
+    <div class="column">34</div>
+  </div>
+
+</body>

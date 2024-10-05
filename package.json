@@ -14,6 +14,8 @@
     "serialport": "^10.0.8"
   },
   "dependencies": {
+    "@serialport/binding-mock": "^10.2.2",
+    "bluebird": "^3.7.2",
     "express": "^4.19.2",
     "lodash": "^4.17.21",
     "socket.io": "^4.7.5",
