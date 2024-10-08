@@ -24,6 +24,18 @@
     const ctx = canvas.getContext('2d');
     ctx.font = '20px arial';
     ctx.fillStyle = 'white';
+    // if(rpm> 2000) {
+    //   ctx.fillStyle = 'yellow';
+    // if(rpm > 3000) {
+    //   ctx.fillStyle = 'green';
+    // }
+    // if(rpm > 4000) {
+    //   ctx.fillStyle = 'red';
+    // }
+    // if(rpm > 5000) {
+    //   ctx.fillStyle = 'blue';
+    // }
+    
     ctx.fillRect(mrgn, mrgn+10, (rpm_width/max_rpm)*rpm, 50)
     for(let i = 0; i < 7; i++) {
       const step = (rpm_width)/6
@@ -35,6 +47,7 @@
 <style>
 .body {
   background-color: black;
+  font-family: Arial;
 }
 .row {
   display: flex;
@@ -52,7 +65,7 @@ fieldset {
   margin: 5px;
 }
 legend {
-  font-size: 25px;
+  font-size: 20px;
 }
 .p1 {
   margin: 0;

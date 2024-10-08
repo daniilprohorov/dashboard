@@ -11,6 +11,7 @@ import express from 'express';
 import bluebird from 'bluebird';
 import { SerialPortMock } from 'serialport'
 import { MockBinding } from '@serialport/binding-mock'
+import dateFormat from 'dateformat';
 const debug = true;
 // const path = '/dev/cu.usbserial-10';
 const path = '/dev/ROBOT';
@@ -115,7 +116,11 @@ io.on('connection', async (socket) => {
   // socket.emit('hi', JSON.stringify(data));
   // let i = 0;
   while(true) {
+
     await bluebird.delay(10);
+
+    const time = dateFormat(new Date(), "HH:MM");
+    data['time'] = time;
     socket.emit('hi', JSON.stringify(data));
   }
 });
