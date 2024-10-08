@@ -75,7 +75,7 @@ const parser = port.pipe(new ReadlineParser())
 
 parser.on('data', async function(_data) {
   data = JSON.parse(_data);
-  console.log(_data);
+  // console.log(_data);
   // const obj = dataToObject(data)
   // const savedObj = await saveToDb(db, data)
   // showIden(savedObj, '8FC');

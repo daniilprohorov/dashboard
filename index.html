@@ -9,40 +9,150 @@
   });
 </script>
 <style>
+.body {
+  background-color: black;
+}
 .row {
   display: flex;
 }
 .column {
+  /* color: white; */
   flex: 50%;
+  /* text-align: center; */
+  /* border: 2px solid white; */
+  margin: 2px;
+  margin-left: 10px;
+  margin-right: 10px;
+  /* padding-top: 30px;
+  padding-bottom: 30px; */
+}
+fieldset {
+  color: white;
   text-align: center;
-  border: 1px solid black;
-  margin: 20px;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  border: 3px solid white;
+  margin: 5px;
+  /* padding-top: 0px;
+  padding-bottom: 0px; */
+}
+legend {
+  font-size: 25px;
+}
+.p1 {
+  margin: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 80px;
+}
+
+.p2 {
+  margin: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 40px;
+}
+
+.p3 {
+  margin: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 40px;
 }
 </style>
-<body>
+<body class="body">
   <p id="test_text"></p>
 
   <div class="row">
-    <div class="column" id="rpm">default</div>
-    <div class="column">12</div>
-    <div class="column">13</div>
-    <div class="column">14</div>
-    <div class="column">15</div>
+    <div class="column">
+      <fieldset>
+        <legend> RPM </legend>
+        <p class="p1" id="rpm">rpm</p>
+      </fieldset>
+    </div>
+    <div class="column">
+      <fieldset>
+        <legend> Gear </legend>
+        <p class="p1" id="gear">N</p>
+      </fieldset>
+    </div>
+    <div class="column">
+      <fieldset>
+        <legend> Speed </legend>
+        <p class="p1" id="speed">speed</p>
+      </fieldset>
+    </div>
   </div>
 
   <div class="row">
-    <div class="column">21</div>
-    <div class="column">22</div>
-    <div class="column">23</div>
+    <div class="column">
+      <fieldset>
+        <legend> W temp </legend>
+        <p class="p2" id="wtmp">wtmp</p>
+      </fieldset>
+    </div>
+
+    <div class="column">
+      <fieldset>
+        <legend> O tmp </legend>
+        <p class="p2" id="otmp">otmp</p>
+      </fieldset>
+    </div>
+
+    <div class="column">
+      <fieldset>
+        <legend> O lvl </legend>
+        <p class="p2" id="olvl">olvl</p>
+      </fieldset>
+    </div>
+
+    <div class="column">
+      <fieldset>
+        <legend> F cns </legend>
+        <p class="p2" id="fcns">fcns</p>
+      </fieldset>
+    </div>
+
+    <div class="column">
+      <fieldset>
+        <legend> Range </legend>
+        <p class="p2" id="range">range</p>
+      </fieldset>
+    </div>
+
+    <div class="column">
+      <fieldset>
+        <legend> F lvl </legend>
+        <p class="p2" id="flvl">flvl</p>
+      </fieldset>
+    </div>
+
+    <div class="column">
+      <fieldset>
+        <legend> E tmp </legend>
+        <p class="p2" id="etmp">etmp</p>
+      </fieldset>
+    </div>
   </div>
 
+
   <div class="row">
-    <div class="column">31</div>
-    <div class="column">32</div>
-    <div class="column">33</div>
-    <div class="column">34</div>
+    <div class="column">
+      <fieldset>
+        <legend> Odometer </legend>
+        <p class="p3" id="odometer">odometer</p>
+      </fieldset>
+    </div>
+    <div class="column">
+      <fieldset>
+        <legend> Errors msg </legend>
+        <p class="p3" id="errors">errors msg</p>
+      </fieldset>
+    </div>
+    <div class="column">
+      <fieldset>
+        <legend> Time </legend>
+        <p class="p3" id="time">00:00</p>
+      </fieldset>
+    </div>
   </div>
 
 </body>
