@@ -1,6 +1,4 @@
 import _ from 'lodash';
-import sqlite3 from 'sqlite3'
-import {open} from 'sqlite'
 import {SerialPort} from 'serialport';
 import { ReadlineParser } from 'serialport';
 import {Server} from "socket.io";
@@ -9,7 +7,6 @@ import {fileURLToPath} from 'node:url';
 import {dirname, join} from 'node:path';
 import express from 'express';
 import bluebird from 'bluebird';
-import { SerialPortMock } from 'serialport'
 import { MockBinding } from '@serialport/binding-mock'
 import dateFormat from 'dateformat';
 const debug = true;
