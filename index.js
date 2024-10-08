@@ -141,14 +141,28 @@ port.on('open', () => {
   // ...then test by simulating incoming data
   isOpenSerialPortMock = true;
 })
-let i = 0;
+let i = 1000;
+let up = true;
 while(true){
   if(isOpenSerialPortMock) {
     const dataFromPort = {rpm: i};
     port.port.emitData(`${JSON.stringify(dataFromPort)}\n`) 
-    i++;
+    if(i >= 6000) {
+      up = false;
+    }
+    // if(i <= _.random(800, 3000)) {
+    if(i <= 800) {
+      up = true;
+    }
+    if(up) {
+      i += _.random(10, 50);
+    } else {
+      const random = _.random(10, 200);
+      i -= random;
+
+    }
   }
-  await bluebird.delay(300);
+  await bluebird.delay(10);
 }
 
 // sqlite3.verbose()

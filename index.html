@@ -5,8 +5,32 @@
     const data = JSON.parse(msg);
     Object.keys(data).forEach(key => {
       document.getElementById(key).innerText = data[key];
+      if(key === 'rpm') {
+        draw_rpm_canvas(data[key]);
+      }
     });
   });
+
+  function draw_rpm_canvas(rpm) {
+
+    const max_rpm = 6000;
+    const h = 50;
+    const canvas = document.getElementById('rpm_canvas');
+    canvas.style.width ='100%';
+    canvas.width  = canvas.offsetWidth;
+    const max_w = canvas.offsetWidth;
+    const mrgn = 25;
+    const rpm_width = max_w - (mrgn*2);
+    const ctx = canvas.getContext('2d');
+    ctx.font = '20px arial';
+    ctx.fillStyle = 'white';
+    ctx.fillRect(mrgn, mrgn+10, (rpm_width/max_rpm)*rpm, 50)
+    for(let i = 0; i < 7; i++) {
+      const step = (rpm_width)/6
+      ctx.fillRect(i*step+mrgn, mrgn, 4, 100)
+      ctx.fillText(`${i}`, i*step+mrgn-4, 18);
+    }
+  }
 </script>
 <style>
 .body {
@@ -16,23 +40,16 @@
   display: flex;
 }
 .column {
-  /* color: white; */
   flex: 50%;
-  /* text-align: center; */
-  /* border: 2px solid white; */
   margin: 2px;
   margin-left: 10px;
   margin-right: 10px;
-  /* padding-top: 30px;
-  padding-bottom: 30px; */
 }
 fieldset {
   color: white;
   text-align: center;
   border: 3px solid white;
   margin: 5px;
-  /* padding-top: 0px;
-  padding-bottom: 0px; */
 }
 legend {
   font-size: 25px;
@@ -40,27 +57,27 @@ legend {
 .p1 {
   margin: 0;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   font-size: 80px;
 }
 
 .p2 {
   margin: 0;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   font-size: 40px;
 }
 
 .p3 {
   margin: 0;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   font-size: 40px;
 }
+
 </style>
 <body class="body">
-  <p id="test_text"></p>
-
+  <canvas id="rpm_canvas" height="100"></canvas>
   <div class="row">
     <div class="column">
       <fieldset>
