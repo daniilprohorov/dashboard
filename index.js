@@ -9,8 +9,15 @@ import express from 'express';
 import bluebird from 'bluebird';
 import { MockBinding } from '@serialport/binding-mock'
 import dateFormat from 'dateformat';
-const debug = true;
-const path = '/dev/cu.usbserial-FTB6SPL3';
+import {program} from 'commander';
+program.option('-d, --debug').option('-p, --port <char>');
+
+program.parse();
+
+const {
+  debug = false,
+  port: path = '/dev/cu.usbserial-FTB6SPL3'
+} = program.opts();
 
 MockBinding.createPort(path, {echo: false});
 
