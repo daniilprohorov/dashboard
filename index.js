@@ -32,7 +32,7 @@ const parser = port.pipe(new ReadlineParser())
 parser.on('data', async function(_data) {
   try {
     data = JSON.parse(_data);
-    console.log(data.fcns)
+    // console.log(data.fcns)
   } catch(e) {};
 });
 
@@ -55,11 +55,11 @@ io.on('connection', async (socket) => {
 
     await bluebird.delay(10);
 
+    // flvl: data.flvl/2.5
     const time = dateFormat(new Date(), "HH:MM");
     socket.emit('hi', JSON.stringify({
       ...data,
-      time,
-      flvl: data.flvl/2.5
+      time
     }));
   }
 });
