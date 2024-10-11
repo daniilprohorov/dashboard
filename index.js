@@ -36,14 +36,14 @@ const parser = port.pipe(new ReadlineParser())
 
 parser.on('data', async function(_data) {
   try {
-    const data = JSON.parse(_data);
+    const {rpm, speed, ...data} = JSON.parse(_data);
+    io.emit('moment_data', JSON.stringify({rpm, speed}));
+
     data.flvl = data.flvl/2.5
-
     const time = dateFormat(new Date(), "HH:MM");
-
     const data2send = newData({...data, time})
     if(data2send) {
-      io.emit('hi', data2send);
+      io.emit('long_data', data2send);
     }
   } catch(e) {};
 });
