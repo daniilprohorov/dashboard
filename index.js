@@ -41,6 +41,7 @@ parser.on('data', async function(_data) {
     if(data.flvl) {
       data.flvl = data.flvl/2.5;
     }
+    // data.fcns = data.fcns ? data.fcns / 100 : 0;
     const time = dateFormat(new Date(), "HH:MM");
     const data2send = newData({...data, time})
     if(data2send) {
