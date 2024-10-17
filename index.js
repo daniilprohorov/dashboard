@@ -38,8 +38,9 @@ parser.on('data', async function(_data) {
   try {
     const {rpm, speed, ...data} = JSON.parse(_data);
     io.emit('moment_data', JSON.stringify({rpm, speed}));
-
-    data.flvl = data.flvl/2.5
+    if(data.flvl) {
+      data.flvl = data.flvl/2.5;
+    }
     const time = dateFormat(new Date(), "HH:MM");
     const data2send = newData({...data, time})
     if(data2send) {
