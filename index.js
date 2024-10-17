@@ -71,23 +71,6 @@ app.get('/', (req, res) => {
   res.sendFile(join(__dirname, 'index.html'));
 });
 
-// io.on('connection', async (socket) => {
-//   console.log('a user connected');
-//   // socket.emit('hi', JSON.stringify(data));
-//   // let i = 0;
-//   while(true) {
-
-//     await bluebird.delay(10);
-
-//     // flvl: data.flvl/2.5
-//     const time = dateFormat(new Date(), "HH:MM");
-//     socket.emit('hi', JSON.stringify({
-//       ...data,
-//       time
-//     }));
-//   }
-// });
-
 server.listen(3000, () => {
   console.log('server running at http://localhost:3000');
 });
